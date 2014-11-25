@@ -24,18 +24,17 @@ module ActiveAdmin
             template.link_to("Edit", "#")
           end
 
-          fields = with_new_form_buffer do
-            template.content_tag(:li, class: "fields") do
-              template.content_tag(:ol) do
-                i.input :image, as: :dragonfly, input_html: options
-                i.input :title, as: :text if options[:fields].include? :title
-                i.input :alt if options[:fields].include? :alt
-                i.input :position, as: :hidden
-                i.destroy
-                i.output_buffer.last
-              end
+          template.content_tag(:li, class: "fields") do
+            template.content_tag(:ol) do
+              i.input :image, as: :dragonfly, input_html: options
+              i.input :title, as: :text if options[:fields].include? :title
+              i.input :alt if options[:fields].include? :alt
+              i.input :position, as: :hidden
+              i.destroy
+              i.output_buffer.last
             end
           end
+        
 
           preview << fields << edit
         end
