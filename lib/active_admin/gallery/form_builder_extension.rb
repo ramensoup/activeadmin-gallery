@@ -3,7 +3,7 @@ module ActiveAdmin
     module FormBuilderExtension
       extend ActiveSupport::Concern
       
-      def with_new_form_buffer_NEW
+      def with_new_form_buffer
         output_buffer << "".html_safe
         return_value = yield
         output_buffer.pop
@@ -31,7 +31,7 @@ module ActiveAdmin
             template.link_to("Edit", "#")
           end
 
-          fields = with_new_form_buffer_NEW do
+          fields = with_new_form_buffer do
             template.content_tag(:li, class: "fields") do
               template.content_tag(:ol) do
                 i.input :image, as: :dragonfly, input_html: options
