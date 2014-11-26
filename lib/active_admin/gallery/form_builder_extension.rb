@@ -39,7 +39,7 @@ module ActiveAdmin
                 i.input :alt if options[:fields].include? :alt
                 i.input :position, as: :hidden
                 i.destroy
-                i.form_builder.last
+                i.object.last
               end
             end
           end
@@ -57,9 +57,9 @@ module ActiveAdmin
           form.input :title, as: :text if options[:fields].include? :title
           form.input :alt if options[:fields].include? :alt
           form.destroy
-          form.form_builder.last
+          form.object.last
         end
-        form_builder.last << content
+        object.last << content
       end
 
       module ClassMethods
