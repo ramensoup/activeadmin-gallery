@@ -32,8 +32,7 @@ module ActiveAdmin
                 i.input :alt if options[:fields].include? :alt
                 i.input :position, as: :hidden
                 i.destroy
-                i.template.concat(template.output_buffer)
-                #i.template.output_buffer.last
+                i.template.output_buffer.last
               end
             end
           end
@@ -50,7 +49,7 @@ module ActiveAdmin
           form.input :title, as: :text if options[:fields].include? :title
           form.input :alt if options[:fields].include? :alt
           form.destroy
-          form.template.concat(template.output_buffer)
+          form.template.output_buffer
         end
         template.concat(content)
       end
