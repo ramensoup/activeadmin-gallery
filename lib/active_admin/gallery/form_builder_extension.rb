@@ -24,7 +24,7 @@ module ActiveAdmin
             template.link_to("Edit", "#")
           end
 
-          fields = input_wrapping do
+          fields = with_new_form_buffer do
             template.content_tag(:li, class: "fields") do
               template.content_tag(:ol) do
                 i.input :image, as: :dragonfly, input_html: options
