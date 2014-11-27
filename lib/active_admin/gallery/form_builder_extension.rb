@@ -3,12 +3,12 @@ module ActiveAdmin
     module FormBuilderExtension
       extend ActiveSupport::Concern
       
-      def with_new_buffer
-        @buffer = [''.html_safe]
-        return_value = (yield || '').html_safe
-        @buffer.pop
-        return_value
-      end
+      #def with_new_form_buffer
+       # form_buffers << ''.html_safe
+        #return_value = (yield || '').html_safe
+        #form_buffers.pop
+        #return_value
+      #end
 
       def has_many_images(relation_name, options = {}, &block)
         options = (options || {}).reverse_merge(components: [:upload], fields: [:title, :alt])
@@ -31,7 +31,7 @@ module ActiveAdmin
             template.link_to("Edit", "#")
           end
 
-          fields = with_new_buffer do
+          fields = with_new_form_buffer do
             template.content_tag(:li, class: "fields") do
               template.content_tag(:ol) do
                 i.input :image, as: :dragonfly, input_html: options
@@ -39,7 +39,7 @@ module ActiveAdmin
                 i.input :alt if options[:fields].include? :alt
                 i.input :position, as: :hidden
                 i.destroy
-                i.@buffer.last
+                #i.form_buffers.last
               end
             end
           end
@@ -56,10 +56,9 @@ module ActiveAdmin
           form.input :title, as: :text if options[:fields].include? :title
           form.input :alt if options[:fields].include? :alt
           form.destroy
-          form.@buffer.last
+          #form.form_buffers.last
         end
-        @buffer.last << content
-        content
+        #form_buffers.last << content
       end
 
       module ClassMethods
