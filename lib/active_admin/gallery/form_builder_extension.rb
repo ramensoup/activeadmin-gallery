@@ -2,6 +2,13 @@ module ActiveAdmin
   module Gallery
     module FormBuilderExtension
       extend ActiveSupport::Concern
+      
+      def with_new_form_buffer
+        already_in_an_inputs_block << ''.html_safe
+        return_value = (yield || '').html_safe
+        already_in_an_inputs_block.pop
+        return_value
+      end
 
       def has_many_images(relation_name, options = {}, &block)
         options = (options || {}).reverse_merge(components: [:upload], fields: [:title, :alt])
@@ -32,7 +39,7 @@ module ActiveAdmin
                 i.input :alt if options[:fields].include? :alt
                 i.input :position, as: :hidden
                 i.destroy
-                i.template.output_buffer.last
+                i.already_in_an_inputs_block.last
               end
             end
           end
@@ -49,9 +56,9 @@ module ActiveAdmin
           form.input :title, as: :text if options[:fields].include? :title
           form.input :alt if options[:fields].include? :alt
           form.destroy
-          form.template.output_buffer.last
+          form.already_in_an_inputs_block.last
         end
-        template.output_buffer.last << content
+        already_in_an_inputs_block.last << content
       end
 
       module ClassMethods
