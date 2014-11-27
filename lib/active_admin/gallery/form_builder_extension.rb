@@ -49,9 +49,9 @@ module ActiveAdmin
           form.input :title, as: :text if options[:fields].include? :title
           form.input :alt if options[:fields].include? :alt
           form.destroy
-          form.already_in_an_inputs_block.last
+          form.already_in_an_inputs_block
         end
-        already_in_an_inputs_block.last << content
+        already_in_an_inputs_block += content
       end
 
       module ClassMethods
