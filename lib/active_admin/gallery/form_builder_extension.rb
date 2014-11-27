@@ -49,9 +49,9 @@ module ActiveAdmin
           form.input :title, as: :text if options[:fields].include? :title
           form.input :alt if options[:fields].include? :alt
           form.destroy
-          form.template.output_buffer
+          form.template.output_buffer.last
         end
-        template.output_buffer
+        template.output_buffer << content
       end
 
       module ClassMethods
