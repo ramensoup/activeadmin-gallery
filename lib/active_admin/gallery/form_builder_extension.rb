@@ -51,7 +51,7 @@ module ActiveAdmin
           form.destroy
           form.template.output_buffer
         end
-        template.concat(content)
+        template.output_buffer
       end
 
       module ClassMethods
