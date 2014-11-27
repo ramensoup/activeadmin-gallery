@@ -51,7 +51,7 @@ module ActiveAdmin
           form.destroy
           form.already_in_an_inputs_block
         end
-        already_in_an_inputs_block += content
+        already_in_an_inputs_block = content
       end
 
       module ClassMethods
