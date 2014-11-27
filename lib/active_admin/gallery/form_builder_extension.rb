@@ -24,7 +24,7 @@ module ActiveAdmin
             template.link_to("Edit", "#")
           end
 
-          fields = without_wrapper do
+          fields = with_new_form_buffer do
             template.content_tag(:li, class: "fields") do
               template.content_tag(:ol) do
                 i.input :image, as: :dragonfly, input_html: options
@@ -51,7 +51,7 @@ module ActiveAdmin
           form.destroy
           form.template.output_buffer.last
         end
-        template.output_buffer << content
+        template.output_buffer.last << content
       end
 
       module ClassMethods
