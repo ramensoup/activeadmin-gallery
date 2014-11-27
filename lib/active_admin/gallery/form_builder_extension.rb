@@ -2,6 +2,13 @@ module ActiveAdmin
   module Gallery
     module FormBuilderExtension
       extend ActiveSupport::Concern
+      
+      def with_new_form_buffer
+        template.output_buffer << ''.html_safe
+        return_value = (yield || '').html_safe
+        template.output_buffer.pop
+        return_value
+      end
 
       def has_many_images(relation_name, options = {}, &block)
         options = (options || {}).reverse_merge(components: [:upload], fields: [:title, :alt])
