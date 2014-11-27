@@ -32,7 +32,7 @@ module ActiveAdmin
                 i.input :alt if options[:fields].include? :alt
                 i.input :position, as: :hidden
                 i.destroy
-                i.already_in_an_inputs_block.last
+                i.template.output_buffer.last
               end
             end
           end
@@ -49,9 +49,9 @@ module ActiveAdmin
           form.input :title, as: :text if options[:fields].include? :title
           form.input :alt if options[:fields].include? :alt
           form.destroy
-          form.already_in_an_inputs_block
+          form.template.output_buffer.last
         end
-        already_in_an_inputs_block = content
+        template.output_buffer << content
       end
 
       module ClassMethods
