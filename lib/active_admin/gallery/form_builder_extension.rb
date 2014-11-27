@@ -4,9 +4,9 @@ module ActiveAdmin
       extend ActiveSupport::Concern
       
       def with_new_form_buffer
-        already_in_an_inputs_block << ''.html_safe
+        template.output_buffer << ''.html_safe
         return_value = (yield || '').html_safe
-        already_in_an_inputs_block.pop
+        template.output_buffer.pop
         return_value
       end
 
@@ -39,7 +39,7 @@ module ActiveAdmin
                 i.input :alt if options[:fields].include? :alt
                 i.input :position, as: :hidden
                 i.destroy
-                i.already_in_an_inputs_block.last
+                i.template.output_buffer.last
               end
             end
           end
@@ -56,9 +56,9 @@ module ActiveAdmin
           form.input :title, as: :text if options[:fields].include? :title
           form.input :alt if options[:fields].include? :alt
           form.destroy
-          form.already_in_an_inputs_block.last
+          form.template.output_buffer.last
         end
-        already_in_an_inputs_block.last << content
+        template.output_buffer.last << content
       end
 
       module ClassMethods
