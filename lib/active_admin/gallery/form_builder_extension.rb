@@ -52,6 +52,12 @@ module ActiveAdmin
           form.destroy
           #form.form_buffers.last
           #form.html = "".html_safe
+          if self.respond_to?(:form_buffers)
+           html = form_buffers.last
+         else
+           html = "".html_safe
+         end
+         form.html
         end
         html = "".html_safe
         html << content
