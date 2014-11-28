@@ -43,6 +43,7 @@ module ActiveAdmin
       end
 
       def has_image(relation_name, options = {}, &block)
+        html = "".html_safe
         options = (options || {}).reverse_merge(components: [:preview, :upload], fields: [:title, :alt])
         object.send("build_#{relation_name}") unless object.send(relation_name).present?
         content = inputs_for_nested_attributes(for: relation_name, class: "inputs has_image") do |form|
@@ -53,7 +54,6 @@ module ActiveAdmin
           #form.form_buffers.last
           #form.html = "".html_safe
         end
-        #html = "".html_safe
         html << content
       end
 
