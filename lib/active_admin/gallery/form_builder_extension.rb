@@ -54,7 +54,7 @@ module ActiveAdmin
           #form.form_buffers.last
           #form.html = "".html_safe
         end
-        html << content
+        html += content
       end
 
       module ClassMethods
