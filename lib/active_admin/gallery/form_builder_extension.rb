@@ -24,7 +24,8 @@ module ActiveAdmin
             template.link_to("Edit", "#")
           end
 
-          fields = without_wrapper do
+          #fields = without_wrapper do
+          html = "".html_safe do
             template.content_tag(:li, class: "fields") do
               template.content_tag(:ol) do
                 i.input :image, as: :dragonfly, input_html: options
@@ -33,16 +34,16 @@ module ActiveAdmin
                 i.input :position, as: :hidden
                 i.destroy
                 #i.form_buffers.last
-                #i.html = "".html_safe
               end
             end
           end
 
-          preview << fields << edit
+          preview << html << edit
         end
       end
 
       def has_image(relation_name, options = {}, &block)
+        html = "".html_safe
         options = (options || {}).reverse_merge(components: [:preview, :upload], fields: [:title, :alt])
         object.send("build_#{relation_name}") unless object.send(relation_name).present?
         content = inputs_for_nested_attributes(for: relation_name, class: "inputs has_image") do |form|
@@ -51,9 +52,7 @@ module ActiveAdmin
           form.input :alt if options[:fields].include? :alt
           form.destroy
           #form.form_buffers.last
-          form.html = "".html_safe
         end
-        html = "".html_safe
         html << content
       end
 
