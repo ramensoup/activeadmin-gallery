@@ -51,9 +51,8 @@ module ActiveAdmin
           form.input :alt if options[:fields].include? :alt
           form.destroy
           #form.form_buffers.last
-          html = "".html_safe
         end
-        html << content
+        html = content
       end
 
       module ClassMethods
