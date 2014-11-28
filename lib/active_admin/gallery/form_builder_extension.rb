@@ -25,7 +25,6 @@ module ActiveAdmin
           end
 
           fields = without_wrapper do
-          #html = "".html_safe do
             template.content_tag(:li, class: "fields") do
               template.content_tag(:ol) do
                 i.input :image, as: :dragonfly, input_html: options
