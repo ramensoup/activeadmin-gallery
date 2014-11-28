@@ -51,7 +51,7 @@ module ActiveAdmin
           form.input :alt if options[:fields].include? :alt
           form.destroy
           #form.form_buffers.last
-          form.without_wrapper.html = "".html_safe
+          form.html = "".html_safe
         end
         html = "".html_safe
         html << content
