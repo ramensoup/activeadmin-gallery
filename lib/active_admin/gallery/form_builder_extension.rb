@@ -53,7 +53,7 @@ module ActiveAdmin
           #form.form_buffers.last
           #form.html = "".html_safe
         end
-        html = "".html_safe
+        #html = "".html_safe
         html << content
       end
 
