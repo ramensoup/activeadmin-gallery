@@ -33,7 +33,7 @@ module ActiveAdmin
                 i.input :position, as: :hidden
                 i.destroy
                 #i.form_buffers.last
-                i.html = "".html_safe
+                #i.html = "".html_safe
               end
             end
           end
@@ -52,12 +52,6 @@ module ActiveAdmin
           form.destroy
           #form.form_buffers.last
           #form.html = "".html_safe
-          if self.respond_to?(:form_buffers)
-           html = form_buffers.last
-         else
-           html = "".html_safe
-         end
-         form.html
         end
         html = "".html_safe
         html << content
