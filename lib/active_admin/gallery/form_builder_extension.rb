@@ -24,7 +24,7 @@ module ActiveAdmin
             template.link_to("Edit", "#")
           end
 
-          fields = without_wrapper do
+          fields = without_buffer do
             template.content_tag(:li, class: "fields") do
               template.content_tag(:ol) do
                 i.input :image, as: :dragonfly, input_html: options
@@ -32,7 +32,8 @@ module ActiveAdmin
                 i.input :alt if options[:fields].include? :alt
                 i.input :position, as: :hidden
                 i.destroy
-                i.template.output_buffer.last
+                #i.form_buffers.last
+                i.html = "".html_safe
               end
             end
           end
@@ -49,9 +50,10 @@ module ActiveAdmin
           form.input :title, as: :text if options[:fields].include? :title
           form.input :alt if options[:fields].include? :alt
           form.destroy
-          form.template.output_buffer.last
+          #form.form_buffers.last
+          form.html = "".html_safe
         end
-        template.output_buffer << content
+        html << content
       end
 
       module ClassMethods
