@@ -24,8 +24,8 @@ module ActiveAdmin
             template.link_to("Edit", "#")
           end
 
-          #fields = without_wrapper do
-          html = "".html_safe do
+          fields = without_wrapper do
+          #html = "".html_safe do
             template.content_tag(:li, class: "fields") do
               template.content_tag(:ol) do
                 i.input :image, as: :dragonfly, input_html: options
@@ -38,7 +38,7 @@ module ActiveAdmin
             end
           end
 
-          preview << html << edit
+          preview << fields << edit
         end
       end
 
