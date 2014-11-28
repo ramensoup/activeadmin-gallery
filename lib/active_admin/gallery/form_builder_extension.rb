@@ -52,7 +52,7 @@ module ActiveAdmin
           form.destroy
           #form.form_buffers.last
         end
-        html = content
+        html << content
       end
 
       module ClassMethods
